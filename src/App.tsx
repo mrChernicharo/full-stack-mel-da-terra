@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 const s = {
   app: {
@@ -12,9 +12,34 @@ const s = {
 };
 
 function App() {
-  const [count, setCount] = useState(0);
+  const [products, setProducts] = useState<any[]>([]);
 
-  return <div style={s.app}>hello mel</div>;
+  const fetchProducts = async () => {
+    const response = await fetch("http://localhost:9000/products");
+    const data = await response.json();
+    setProducts(data);
+  };
+
+  useEffect(() => {
+    fetchProducts();
+  }, []);
+
+  return (
+    <div style={s.app}>
+      <h1>hello mel</h1>
+      <ul>
+        {products.map((prod) => (
+          <li key={prod.id}>
+            <div>
+              <div>{prod.nome}</div>
+              <div>R${prod.valor / 100}</div>
+              <img src={prod.imgPath} />
+            </div>
+          </li>
+        ))}
+      </ul>
+    </div>
+  );
 }
 
 export default App;

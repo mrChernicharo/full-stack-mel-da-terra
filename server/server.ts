@@ -1,10 +1,12 @@
 import express, { Application, Request, Response } from "express";
 import { db, getAllFromCollection, getDocData } from "./database";
 import { produtosImgUrls } from "./img-urls";
+const cors = require("cors");
 
 export function initServer() {
   const bodyParser = require("body-parser");
   const app: Application = express();
+  app.use(cors());
 
   app.route("/").get((req, res) => res.status(200).send("<h1>API is up and running!</h1>"));
 
