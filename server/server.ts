@@ -1,5 +1,6 @@
 import express, { Application, Request, Response } from "express";
-import { db } from "./database";
+import { db, getAllFromCollection, getDocData } from "./database";
+import { produtosImgUrls } from "./img-urls";
 
 export function initServer() {
   const bodyParser = require("body-parser");
@@ -14,17 +15,55 @@ export function initServer() {
 
   app.route("/add").get(async (req: Request, res: Response) => {
     try {
-      const product = {
-        name: "mel",
-        price: 1900,
-      };
-      const productsCollection = db.collection("products");
-      const productRef = await productsCollection.add(product);
+      const products = [
+        {
+          nome: "kit degustação",
+          pote: "kit",
+          valor: 4000,
+          imgPath: produtosImgUrls["kit"],
+        },
+        {
+          nome: "pote de 150g",
+          pote: "150",
+          valor: 1800,
+          imgPath: produtosImgUrls["150"],
+        },
+        {
+          nome: "pote de 350g",
+          pote: "350",
+          valor: 2800,
+          imgPath: produtosImgUrls["350"],
+        },
+        {
+          nome: "pote de 480g",
+          pote: "480",
+          valor: 3500,
+          imgPath: produtosImgUrls["480"],
+        },
+        {
+          nome: "pote de 780g",
+          pote: "780",
+          valor: 4800,
+          imgPath: produtosImgUrls["780"],
+        },
+      ];
 
-      res.json({ product, id: productRef.id });
+      const productsCollection = db.collection("products");
+
+      for (let product of products) {
+        await productsCollection.add(product);
+        console.log(product);
+      }
+
+      res.json({ products });
     } catch (err) {
       res.status(404).send(err);
     }
+  });
+
+  app.route("/products").get(async (req, res) => {
+    const prods = await getAllFromCollection("products");
+    res.json(prods);
   });
 
   const PORT = process.env.PORT || 9000;
