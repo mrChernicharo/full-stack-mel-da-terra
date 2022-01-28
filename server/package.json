@@ -8,6 +8,7 @@
     "start:local": "tsc-watch -P ./server.tsconfig.json --onSuccess \"node dist/main.js\""
   },
   "dependencies": {
+    "@google-cloud/firestore": "^5.0.2",
     "body-parser": "^1.19.1",
     "cors": "^2.8.5",
     "dotenv": "^14.3.2",

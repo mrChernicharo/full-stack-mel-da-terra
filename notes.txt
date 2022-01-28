@@ -1,0 +1,9 @@
+firestore backend interaction
+
+install "@google-cloud/firestore": "^5.0.2",
+
+In the GCP panel go to Service Accounts, choose the project and create a new service Account
+
+for this account, create a new Key, click it and download the json data
+
+put it inside the service-accounts folder
