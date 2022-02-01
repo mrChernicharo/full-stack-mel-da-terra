@@ -23,4 +23,27 @@ code {
 a {
   text-decoration: none;
   color: dodgerblue;
+  cursor: pointer;
+}
+
+button {
+  cursor: pointer;
+  border: none;
+  background-color: dodgerblue;
+  padding: 0.5rem;
+  border-radius: 6px;
+  color: white;
+  font-size: 16px;
+  font-weight: 600;
+  transition: 0.1s;
+}
+button:hover {
+  opacity: 0.8;
+}
+button:active {
+  opacity: 0.5;
+}
+
+ul {
+  list-style: none;
 }
