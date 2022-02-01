@@ -5,12 +5,8 @@ import { Home } from "./Pages/Home";
 import { Login } from "./Pages/Login";
 import { NotFound } from "./Pages/NotFound";
 import { Register } from "./Pages/Register";
-import { authStateSubscription } from "./services/firebase/auth";
 
 function App() {
-  useEffect(() => {
-    authStateSubscription();
-  }, []);
   return (
     <>
       <Header />

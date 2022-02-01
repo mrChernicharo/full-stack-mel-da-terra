@@ -1,23 +1,18 @@
-import { BaseSyntheticEvent } from "react";
+import { BaseSyntheticEvent, useContext } from "react";
 import { Link } from "react-router-dom";
 import "firebaseui/dist/firebaseui.css";
-
-import { firebaseSignInWithEmailAndPassword } from "../services/firebase/auth";
+import { AuthContext } from "../hooks/AuthContext";
 
 export const Login = () => {
+  const { signIn } = useContext(AuthContext);
+
   const handleSubmit = async (e: BaseSyntheticEvent) => {
     e.preventDefault();
     console.log({ e, target: e.target, email: e.target[0].value, password: e.target[1].value });
 
     const [email, password] = [e.target[0].value, e.target[1].value];
 
-    firebaseSignInWithEmailAndPassword(email, password)
-      .then((userCredential) => {
-        const user = userCredential?.user;
-      })
-      .catch((error) => {
-        console.log(error.code, error.message);
-      });
+    signIn(email, password);
   };
 
   return (

@@ -1,10 +1,12 @@
 import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut, onAuthStateChanged } from "firebase/auth";
+import { IAppUser } from "../../hooks/AuthContext";
 
-export const authStateSubscription = () => {
-  onAuthStateChanged(getAuth(), (user) => {
+export const authStateSubscription = (setUser: (user: IAppUser) => void) => {
+  return onAuthStateChanged(getAuth(), (user) => {
     if (user) {
-      console.log(user);
       const uid = user.uid;
+      console.log({ user, uid });
+      setUser(user);
     } else {
       console.log("user signed out");
     }
@@ -14,6 +16,7 @@ export const authStateSubscription = () => {
 export const firebaseCreateAccountWithEmailAndPassword = async (email: string, password: string) => {
   try {
     const userCredential = await createUserWithEmailAndPassword(getAuth(), email, password);
+    console.log("New account created", userCredential.user.email);
 
     return userCredential;
   } catch (err) {
@@ -24,6 +27,7 @@ export const firebaseCreateAccountWithEmailAndPassword = async (email: string, p
 export const firebaseSignInWithEmailAndPassword = async (email: string, password: string) => {
   try {
     const userCredential = await signInWithEmailAndPassword(getAuth(), email, password);
+    console.log("Login successful", userCredential.user.email);
 
     return userCredential;
   } catch (err) {
