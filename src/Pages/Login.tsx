@@ -1,7 +1,5 @@
-// import * as fireAuth from "firebase/auth";
-// import * as firebaseui from "firebaseui";
-// import "firebaseui/dist/firebaseui.css";
 import { Link } from "react-router-dom";
+import "firebaseui/dist/firebaseui.css";
 
 export const Login = () => {
   return (
