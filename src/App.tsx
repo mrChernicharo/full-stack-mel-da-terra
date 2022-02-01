@@ -1,17 +1,27 @@
+import { useEffect } from "react";
 import { Route, Routes } from "react-router-dom";
+import { Header } from "./Components/Header";
 import { Home } from "./Pages/Home";
 import { Login } from "./Pages/Login";
 import { NotFound } from "./Pages/NotFound";
 import { Register } from "./Pages/Register";
+import { authStateSubscription } from "./services/firebase/auth";
 
 function App() {
+  useEffect(() => {
+    authStateSubscription();
+  }, []);
   return (
-    <Routes>
-      <Route path="/" element={<Home />} />
-      <Route path="/login" element={<Login />} />
-      <Route path="/register" element={<Register />} />
-      <Route path="*" element={<NotFound />} />
-    </Routes>
+    <>
+      <Header />
+
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/login" element={<Login />} />
+        <Route path="/register" element={<Register />} />
+        <Route path="*" element={<NotFound />} />
+      </Routes>
+    </>
   );
 }
 

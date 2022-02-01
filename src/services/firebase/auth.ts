@@ -1,12 +1,26 @@
-import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut } from "firebase/auth";
+import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut, onAuthStateChanged } from "firebase/auth";
 
-const auth = getAuth();
+export const fireAuth = getAuth();
+
+export const authStateSubscription = () => {
+  onAuthStateChanged(fireAuth, (user) => {
+    if (user) {
+      console.log(user);
+      const uid = user.uid;
+      // ...
+    } else {
+      console.log("user signed out");
+      // User is signed out
+      // ...
+    }
+  });
+};
 
 export const firebaseCreateAccountWithEmailAndPassword = async (email: string, password: string) => {
   try {
-    const userCredential = await createUserWithEmailAndPassword(auth, email, password);
+    const userCredential = await createUserWithEmailAndPassword(fireAuth, email, password);
 
-    console.log(userCredential);
+    return userCredential;
   } catch (err) {
     console.log(err);
   }
@@ -14,9 +28,9 @@ export const firebaseCreateAccountWithEmailAndPassword = async (email: string, p
 
 export const firebaseSignInWithEmailAndPassword = async (email: string, password: string) => {
   try {
-    const userCredential = await signInWithEmailAndPassword(auth, email, password);
+    const userCredential = await signInWithEmailAndPassword(fireAuth, email, password);
 
-    console.log(userCredential);
+    return userCredential;
   } catch (err) {
     console.log(err);
   }
@@ -24,7 +38,7 @@ export const firebaseSignInWithEmailAndPassword = async (email: string, password
 
 export const firebaseSignOut = async () => {
   try {
-    await signOut(auth);
+    await signOut(fireAuth);
 
     console.log("Logged out!");
   } catch (err) {
