@@ -8,10 +8,8 @@ export const Home = () => {
 
   useEffect(() => {
     fetchAllProducts().then((prods) => setProducts(prods));
-  }, []);
 
-  useEffect(() => {
-    getProduct("mlU1nbnueP3wTtN4wt90").then((prod) => console.log(prod));
+    // getProduct("mlU1nbnueP3wTtN4wt90").then((prod) => console.log(prod));
   }, []);
 
   return (

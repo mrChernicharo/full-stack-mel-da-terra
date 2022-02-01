@@ -1,24 +1,19 @@
 import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut, onAuthStateChanged } from "firebase/auth";
 
-export const fireAuth = getAuth();
-
 export const authStateSubscription = () => {
-  onAuthStateChanged(fireAuth, (user) => {
+  onAuthStateChanged(getAuth(), (user) => {
     if (user) {
       console.log(user);
       const uid = user.uid;
-      // ...
     } else {
       console.log("user signed out");
-      // User is signed out
-      // ...
     }
   });
 };
 
 export const firebaseCreateAccountWithEmailAndPassword = async (email: string, password: string) => {
   try {
-    const userCredential = await createUserWithEmailAndPassword(fireAuth, email, password);
+    const userCredential = await createUserWithEmailAndPassword(getAuth(), email, password);
 
     return userCredential;
   } catch (err) {
@@ -28,7 +23,7 @@ export const firebaseCreateAccountWithEmailAndPassword = async (email: string, p
 
 export const firebaseSignInWithEmailAndPassword = async (email: string, password: string) => {
   try {
-    const userCredential = await signInWithEmailAndPassword(fireAuth, email, password);
+    const userCredential = await signInWithEmailAndPassword(getAuth(), email, password);
 
     return userCredential;
   } catch (err) {
@@ -38,6 +33,8 @@ export const firebaseSignInWithEmailAndPassword = async (email: string, password
 
 export const firebaseSignOut = async () => {
   try {
+    const fireAuth = getAuth();
+
     await signOut(fireAuth);
 
     console.log("Logged out!");
