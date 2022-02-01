@@ -1,44 +1,17 @@
-import { useEffect, useState } from "react";
-
-const s = {
-  app: {
-    background: "black",
-    color: "white",
-    display: "flex",
-    justifyContent: "center",
-    alignItems: "center",
-    height: "100vh",
-  },
-};
+import { Route, Routes } from "react-router-dom";
+import { Home } from "./Pages/Home";
+import { Login } from "./Pages/Login";
+import { NotFound } from "./Pages/NotFound";
+import { Register } from "./Pages/Register";
 
 function App() {
-  const [products, setProducts] = useState<any[]>([]);
-
-  const fetchProducts = async () => {
-    const response = await fetch("http://localhost:9000/products");
-    const data = await response.json();
-    setProducts(data);
-  };
-
-  useEffect(() => {
-    fetchProducts();
-  }, []);
-
   return (
-    <div style={s.app}>
-      <h1>hello mel</h1>
-      <ul>
-        {products.map((prod) => (
-          <li key={prod.id}>
-            <div>
-              <div>{prod.nome}</div>
-              <div>R${prod.valor / 100}</div>
-              <img src={prod.imgPath} />
-            </div>
-          </li>
-        ))}
-      </ul>
-    </div>
+    <Routes>
+      <Route path="/" element={<Home />} />
+      <Route path="/login" element={<Login />} />
+      <Route path="/register" element={<Register />} />
+      <Route path="*" element={<NotFound />} />
+    </Routes>
   );
 }
 

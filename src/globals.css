@@ -9,3 +9,17 @@ body {
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New", monospace;
 }
+
+.page-container {
+  background: black;
+  color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+a {
+  text-decoration: none;
+  color: dodgerblue;
+}
