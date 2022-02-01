@@ -1,7 +1,7 @@
 import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut, onAuthStateChanged } from "firebase/auth";
 import { IAppUser } from "../../hooks/AuthContext";
 
-export const authStateSubscription = (setUser: (user: IAppUser) => void) => {
+export const fireAuthStateSubscription = (setUser: (user: IAppUser) => void) => {
   return onAuthStateChanged(getAuth(), (user) => {
     if (user) {
       const uid = user.uid;

@@ -14,7 +14,7 @@ export const Home = () => {
 
   return (
     <div className="page-container">
-      <h1>Hello Mel</h1>
+      <h1>Mel da Terra Verde</h1>
 
       <Link to="/login">Login</Link>
 

@@ -1,7 +1,7 @@
 import { User as FirebaseUser } from "firebase/auth";
 import { createContext, ReactNode, useContext, useEffect, useState } from "react";
 import {
-  authStateSubscription,
+  fireAuthStateSubscription,
   firebaseCreateAccountWithEmailAndPassword,
   firebaseSignInWithEmailAndPassword,
   firebaseSignOut,
@@ -46,7 +46,7 @@ export const AuthContextProvider = ({ children }: IAuthContextProviderProps) => 
   };
 
   useEffect(() => {
-    const unsubscribe = authStateSubscription(setUser);
+    const unsubscribe = fireAuthStateSubscription(setUser);
 
     return () => unsubscribe();
   }, []);

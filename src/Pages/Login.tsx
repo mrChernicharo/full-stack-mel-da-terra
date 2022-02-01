@@ -19,8 +19,6 @@ export const Login = () => {
     <div className="page-container">
       <h1>Login</h1>
 
-      <Link to="/register">Criar conta</Link>
-
       <form onSubmit={handleSubmit}>
         <label>Email</label>
         <input type="email" />
@@ -29,6 +27,8 @@ export const Login = () => {
         <input type="password" />
         <button type="submit">Ok!</button>
       </form>
+
+      <Link to="/register">Criar conta</Link>
     </div>
   );
 };

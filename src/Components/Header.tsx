@@ -1,11 +1,16 @@
 import { useContext, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { AuthContext } from "../hooks/AuthContext";
+import { FaArrowLeft } from "react-icons/fa";
 
-const s: any = {
+const s: { [key: string]: {} } = {
   container: {
     position: "fixed",
+    width: "100%",
     color: "white",
+    display: "flex",
+    justifyContent: "space-between",
+    // borderBottom: "1px solid white",
   },
 };
 
@@ -30,6 +35,10 @@ export const Header = () => {
       </Link>
 
       <span>{username}</span>
+
+      <Link to="/">
+        <FaArrowLeft />
+      </Link>
     </header>
   );
 };
