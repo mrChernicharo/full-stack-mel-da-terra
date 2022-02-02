@@ -1,31 +1,25 @@
 import { useEffect, useState } from "react";
-import { IOrderItem, useOrdersContext } from "../hooks/OrdersContext";
+import { useOrdersContext } from "../hooks/OrdersContext";
 
 export const Cart = () => {
-  const [items, setItems] = useState<IOrderItem[]>([]);
+  const { val, sumVal } = useOrdersContext();
 
-  const { cart } = useOrdersContext();
-
-  useEffect(() => {
-    setItems((its) => cart.map((item) => item));
-
-    return () => {};
-  }, [cart]);
-
-  useEffect(() => {
-    console.log(items);
-  }, [items]);
+  const handleClick = () => {
+    sumVal();
+  };
 
   return (
     <div>
       <h2>Sacola</h2>
+      <button onClick={handleClick}>click</button>
       <ul>
-        {items.map((item) => {
+        {val}
+        {/* {cart.map((item) => {
           <li key={item.id}>
             <div>{item.product.nome}</div>
             <div>{item.quantity}</div>
           </li>;
-        })}
+        })} */}
       </ul>
     </div>
   );
