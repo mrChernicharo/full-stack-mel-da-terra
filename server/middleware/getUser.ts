@@ -6,12 +6,10 @@ export async function getUseMiddleware(req: Request, res: Response, next: NextFu
 
   if (jwt) {
     try {
-      //
       const jwtPayload = await auth.verifyIdToken(jwt);
-
       // console.log({ jwtPayload });
 
-      req.headers["uid"] = jwtPayload.uid;
+      req["uid"] = jwtPayload.uid;
 
       next();
       //

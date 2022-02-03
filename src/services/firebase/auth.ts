@@ -1,5 +1,9 @@
 import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut, onAuthStateChanged } from "firebase/auth";
+import { DocumentReference, getDoc, setDoc, collection, doc } from "firebase/firestore";
 import { IAppUser } from "../../contexts/AuthContext";
+import { db } from "./firestore";
+
+const defaultImgUrl = "https://avatar-management--avatars.us-west-2.prod.public.atl-paas.net/default-avatar.png";
 
 export const fireAuthStateSubscription = (setUser: (user: IAppUser) => void) => {
   return onAuthStateChanged(getAuth(), (user) => {
@@ -16,7 +20,15 @@ export const fireAuthStateSubscription = (setUser: (user: IAppUser) => void) => 
 export const firebaseCreateAccountWithEmailAndPassword = async (email: string, password: string) => {
   try {
     const userCredential = await createUserWithEmailAndPassword(getAuth(), email, password);
-    console.log("New account created", userCredential.user.email);
+    console.log("New account created", userCredential);
+
+    const userId = userCredential.user.uid;
+
+    // Create firestore user...
+    await setDoc(doc(db, `users`, userId), {
+      email: userCredential.user.email,
+      img: userCredential.user.photoURL || defaultImgUrl,
+    });
 
     return userCredential;
   } catch (err) {
