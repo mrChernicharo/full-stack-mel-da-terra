@@ -1,6 +1,7 @@
 import express, { Application, Request, Response } from "express";
 import { db, getAllFromCollection, getDocData } from "./database";
 import { produtosImgUrls } from "./img-urls";
+import { createCheckoutSession } from "./routes/checkout";
 const cors = require("cors");
 
 export function initServer() {
@@ -67,6 +68,8 @@ export function initServer() {
     const prods = await getAllFromCollection("products");
     res.json(prods);
   });
+
+  app.route("/checkout").post(bodyParser.json(), createCheckoutSession);
 
   const PORT = process.env.PORT || 9000;
   app.listen(PORT, () => {
