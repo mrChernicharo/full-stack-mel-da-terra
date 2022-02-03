@@ -3,7 +3,7 @@ import { Request, Response } from "express";
 export async function createCheckoutSession(req: Request, res: Response) {
   try {
     console.log(req.body);
-    console.log(req.headers);
+    console.log(req.headers["uid"]);
 
     res.status(200).json({ message: "cool!" });
   } catch (err) {
