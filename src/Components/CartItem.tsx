@@ -9,11 +9,11 @@ const s = {
 };
 
 interface ICartItemProps {
-  product: IProduct;
-  quantity: number;
+  item: { product: IProduct; quantity: number };
 }
 
-export const CartItem = ({ product, quantity }: ICartItemProps) => {
+export const CartItem = ({ item }: ICartItemProps) => {
+  const { product, quantity } = item;
   const { id, nome, pote, imgPath, valor } = product;
 
   return (

@@ -10,7 +10,7 @@ const s: { [key: string]: {} } = {
     color: "white",
     display: "flex",
     justifyContent: "space-between",
-    // borderBottom: "1px solid white",
+    borderBottom: "1px solid white",
   },
 };
 

@@ -4,6 +4,10 @@ import { fetchAllProducts } from "../services/products";
 import { ProductDetailModal } from "./ProductDetailModal";
 
 const s: { [key: string]: {} } = {
+  ul: {
+    padding: ".5rem",
+    border: "1px solid",
+  },
   productCard: {
     background: "#787878",
     maxHeight: 140,
@@ -46,7 +50,8 @@ export const ProductsList = () => {
 
   return (
     <>
-      <ul>
+      <ul style={s.ul}>
+        <h3>Produtos</h3>
         {products
           .sort((a, b) => a.pote - b.pote)
           .map((prod) => (

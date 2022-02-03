@@ -4,12 +4,15 @@ import "./globals.css";
 import App from "./App";
 import { BrowserRouter } from "react-router-dom";
 import { AuthContextProvider } from "./hooks/AuthContext";
+import { OrdersContextProvider } from "./hooks/OrdersContext";
 
 ReactDOM.render(
   <React.StrictMode>
     <BrowserRouter>
       <AuthContextProvider>
-        <App />
+        <OrdersContextProvider>
+          <App />
+        </OrdersContextProvider>
       </AuthContextProvider>
     </BrowserRouter>
   </React.StrictMode>,

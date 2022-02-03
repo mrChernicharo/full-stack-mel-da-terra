@@ -13,16 +13,9 @@ function App() {
       <Header />
 
       <Routes>
-        <Route
-          path="/"
-          element={
-            <OrdersContextProvider>
-              <Home />
-            </OrdersContextProvider>
-          }
-        />
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
+        <Route path="/" element={<Home />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
     </>
