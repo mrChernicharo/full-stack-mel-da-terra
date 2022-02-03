@@ -51,14 +51,13 @@ export const ProductDetailModal = ({ product, onClose }: IProductDetailProps) =>
   const [quantity, setQuantity] = useState(1);
 
   const handleAddToCart = () => {
-    console.log({ product, quantity });
-    addToCart(product, quantity);
+    addToCart({ product, quantity });
   };
 
-  const handleChangeQuantity = (action: "plus" | "minus") => {
+  const handleChangeQuantity = (action: "+" | "-") => {
     const actions = {
-      minus: () => (quantity > 1 ? setQuantity(quantity - 1) : null),
-      plus: () => setQuantity(quantity + 1),
+      "-": () => (quantity > 1 ? setQuantity(quantity - 1) : null),
+      "+": () => setQuantity(quantity + 1),
     };
 
     actions[action]();
@@ -70,11 +69,11 @@ export const ProductDetailModal = ({ product, onClose }: IProductDetailProps) =>
         <h1>{product.nome}</h1>
 
         <div style={s.quantitySelector}>
-          <span onClick={() => handleChangeQuantity("minus")}>
+          <span onClick={() => handleChangeQuantity("-")}>
             <FaMinusCircle />
           </span>
           <span>{quantity}</span>
-          <span onClick={() => handleChangeQuantity("plus")}>
+          <span onClick={() => handleChangeQuantity("+")}>
             <FaPlusCircle />
           </span>
         </div>

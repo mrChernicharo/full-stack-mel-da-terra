@@ -1,25 +1,22 @@
+import { nanoid } from "nanoid";
 import { useEffect, useState } from "react";
 import { useOrdersContext } from "../hooks/OrdersContext";
+import { CartItem } from "./CartItem";
 
 export const Cart = () => {
-  const { val, sumVal } = useOrdersContext();
+  const { orderItems, addToCart } = useOrdersContext();
 
-  const handleClick = () => {
-    sumVal();
-  };
+  const handleClick = () => {};
 
   return (
     <div>
       <h2>Sacola</h2>
-      <button onClick={handleClick}>click</button>
       <ul>
-        {val}
-        {/* {cart.map((item) => {
-          <li key={item.id}>
-            <div>{item.product.nome}</div>
-            <div>{item.quantity}</div>
-          </li>;
-        })} */}
+        {orderItems.map((item) => (
+          <li key={nanoid()}>
+            <CartItem product={item.product} quantity={item.quantity} />
+          </li>
+        ))}
       </ul>
     </div>
   );

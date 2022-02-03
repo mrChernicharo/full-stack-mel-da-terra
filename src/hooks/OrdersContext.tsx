@@ -6,21 +6,27 @@ interface IOrdersContextProviderProps {
   children: ReactNode;
 }
 
+export interface IOrdersContext {
+  orderItems: any;
+  addToCart: (item: any) => void;
+}
+
 const OrdersContext = createContext({
-  val: 0,
-  sumVal: () => {},
+  orderItems: [],
+  addToCart: (item: any) => {},
 });
 
 export const OrdersContextProvider = ({ children }: IOrdersContextProviderProps) => {
-  const [val, setVal] = useState(0);
+  const [orderItems, setOrderItems] = useState<any[]>([]);
 
-  const sumVal = () => {
-    setVal((v) => v + 1);
+  const addToCart = (item: any) => {
+    console.log(item);
+    setOrderItems((prev) => [...prev, item]);
   };
 
-  const context = {
-    val,
-    sumVal,
+  const context: IOrdersContext = {
+    orderItems,
+    addToCart,
   };
 
   return <OrdersContext.Provider value={context}>{children}</OrdersContext.Provider>;
