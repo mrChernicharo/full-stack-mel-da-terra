@@ -27,12 +27,14 @@ export const Cart = () => {
         ))}
       </ul>
 
-      <button onClick={goToCheckout}>
-        <div>
-          <span>Comprar! </span>
-          <FaShoppingCart />
-        </div>
-      </button>
+      {!!orderItems.length && (
+        <button onClick={goToCheckout}>
+          <div>
+            <span>Comprar! </span>
+            <FaShoppingCart />
+          </div>
+        </button>
+      )}
     </div>
   );
 };

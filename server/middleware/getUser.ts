@@ -6,12 +6,17 @@ export async function getUseMiddleware(req: Request, res: Response, next: NextFu
 
   if (jwt) {
     try {
+      //
       const jwtPayload = await auth.verifyIdToken(jwt);
-      console.log({ jwtPayload });
+
+      // console.log({ jwtPayload });
+
       req.headers["uid"] = jwtPayload.uid;
 
       next();
+      //
     } catch (err) {
+      //
       const message = `Error verifying Firebase Id token`;
       console.log(message, err);
 

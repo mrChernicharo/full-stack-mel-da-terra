@@ -21,7 +21,6 @@ export const OrdersContextProvider = ({ children }: IOrdersContextProviderProps)
   const [orderItems, setOrderItems] = useState<IOrderItem[]>([]);
 
   const addToCart = (item: IOrderItem) => {
-    console.log(item);
     setOrderItems((prev) => [...prev, item]);
   };
 
