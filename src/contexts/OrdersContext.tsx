@@ -1,5 +1,6 @@
 import { nanoid } from "nanoid";
 import { createContext, ReactNode, useContext, useEffect, useState } from "react";
+import { IOrderItem } from "../interfaces/order";
 import { IProduct } from "../interfaces/product";
 
 interface IOrdersContextProviderProps {
@@ -7,19 +8,19 @@ interface IOrdersContextProviderProps {
 }
 
 export interface IOrdersContext {
-  orderItems: any;
-  addToCart: (item: any) => void;
+  orderItems: IOrderItem[];
+  addToCart: (item: IOrderItem) => void;
 }
 
 const OrdersContext = createContext({
-  orderItems: [],
-  addToCart: (item: any) => {},
+  orderItems: [] as IOrderItem[],
+  addToCart: (item: IOrderItem) => {},
 });
 
 export const OrdersContextProvider = ({ children }: IOrdersContextProviderProps) => {
-  const [orderItems, setOrderItems] = useState<any[]>([]);
+  const [orderItems, setOrderItems] = useState<IOrderItem[]>([]);
 
-  const addToCart = (item: any) => {
+  const addToCart = (item: IOrderItem) => {
     console.log(item);
     setOrderItems((prev) => [...prev, item]);
   };

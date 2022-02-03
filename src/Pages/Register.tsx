@@ -1,5 +1,5 @@
 import { BaseSyntheticEvent, useContext } from "react";
-import { AuthContext } from "../hooks/AuthContext";
+import { AuthContext } from "../contexts/AuthContext";
 
 export const Register = () => {
   const { signUp } = useContext(AuthContext);

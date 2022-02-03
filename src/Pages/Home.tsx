@@ -2,7 +2,7 @@ import { lazy, Suspense, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { Cart } from "../Components/Cart";
 import { ProductsList } from "../Components/ProductsList";
-import { useAuthContext } from "../hooks/AuthContext";
+import { useAuthContext } from "../contexts/AuthContext";
 
 export const Home = () => {
   const { user } = useAuthContext();

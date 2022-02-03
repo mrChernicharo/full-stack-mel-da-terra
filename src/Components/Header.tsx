@@ -1,6 +1,6 @@
 import { useContext, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import { AuthContext } from "../hooks/AuthContext";
+import { AuthContext } from "../contexts/AuthContext";
 import { FaArrowLeft } from "react-icons/fa";
 
 const s: { [key: string]: {} } = {

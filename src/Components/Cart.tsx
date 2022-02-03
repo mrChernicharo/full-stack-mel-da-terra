@@ -1,11 +1,11 @@
 import { nanoid } from "nanoid";
 import { useEffect, useState } from "react";
-import { useOrdersContext } from "../hooks/OrdersContext";
+import { useOrdersContext } from "../contexts/OrdersContext";
 import { CartItem } from "./CartItem";
 import { FaShoppingCart } from "react-icons/fa";
 import { Link } from "react-router-dom";
 import { startCheckoutSession } from "../services/stripe/checkout";
-import { useAuthContext } from "../hooks/AuthContext";
+import { useAuthContext } from "../contexts/AuthContext";
 
 export const Cart = () => {
   const { user } = useAuthContext();
@@ -18,9 +18,7 @@ export const Cart = () => {
   return (
     <div style={{ border: "1px solid", padding: ".5rem" }}>
       <h2>Sacola</h2>
-      <button onClick={goToCheckout}>
-        <FaShoppingCart />
-      </button>
+
       <ul>
         {orderItems.map((item) => (
           <li key={nanoid()}>
@@ -28,6 +26,13 @@ export const Cart = () => {
           </li>
         ))}
       </ul>
+
+      <button onClick={goToCheckout}>
+        <div>
+          <span>Comprar! </span>
+          <FaShoppingCart />
+        </div>
+      </button>
     </div>
   );
 };

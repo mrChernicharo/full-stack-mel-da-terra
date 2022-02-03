@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 import { Route, Routes } from "react-router-dom";
 import { Header } from "./Components/Header";
-import { OrdersContextProvider } from "./hooks/OrdersContext";
+import { OrdersContextProvider } from "./contexts/OrdersContext";
 import { Home } from "./Pages/Home";
 import { Login } from "./Pages/Login";
 import { NotFound } from "./Pages/NotFound";

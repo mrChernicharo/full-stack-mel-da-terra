@@ -1,7 +1,7 @@
 import { BaseSyntheticEvent, useContext } from "react";
 import { Link } from "react-router-dom";
 import "firebaseui/dist/firebaseui.css";
-import { AuthContext } from "../hooks/AuthContext";
+import { AuthContext } from "../contexts/AuthContext";
 
 export const Login = () => {
   const { signIn } = useContext(AuthContext);

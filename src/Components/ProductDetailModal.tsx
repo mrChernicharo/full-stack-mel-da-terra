@@ -1,7 +1,7 @@
 import { useContext, useState } from "react";
 import { IProduct } from "../interfaces/product";
 import { FaPlusCircle, FaMinusCircle } from "react-icons/fa";
-import { useOrdersContext } from "../hooks/OrdersContext";
+import { useOrdersContext } from "../contexts/OrdersContext";
 
 const s: { [key: string]: {} } = {
   modalContainer: {

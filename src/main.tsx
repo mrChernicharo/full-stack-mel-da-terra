@@ -3,8 +3,8 @@ import ReactDOM from "react-dom";
 import "./globals.css";
 import App from "./App";
 import { BrowserRouter } from "react-router-dom";
-import { AuthContextProvider } from "./hooks/AuthContext";
-import { OrdersContextProvider } from "./hooks/OrdersContext";
+import { AuthContextProvider } from "./contexts/AuthContext";
+import { OrdersContextProvider } from "./contexts/OrdersContext";
 
 ReactDOM.render(
   <React.StrictMode>
