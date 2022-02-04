@@ -2,7 +2,7 @@ import { useEffect } from "react";
 import { Route, Routes } from "react-router-dom";
 import { Header } from "./Components/Header";
 import { OrdersContextProvider } from "./contexts/OrdersContext";
-import { Checkout } from "./Pages/Checkout";
+import { PurchaseResult } from "./Pages/PurchaseResult";
 import { Home } from "./Pages/Home";
 import { Login } from "./Pages/Login";
 import { NotFound } from "./Pages/NotFound";
@@ -17,7 +17,7 @@ function App() {
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
         <Route path="/" element={<Home />} />
-        <Route path="/stripe-checkout" element={<Checkout />} />
+        <Route path="/stripe-checkout-result" element={<PurchaseResult />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
     </>

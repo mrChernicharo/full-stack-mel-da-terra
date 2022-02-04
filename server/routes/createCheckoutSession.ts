@@ -107,8 +107,8 @@ function setupBaseSessionConfig(info: RequestData, sessionId: string, stripeCust
   const config: any = {
     payment_method_types: ["card"],
     mode: "payment",
-    success_url: `${info.callbackUrl}/?purchaseResult=success&ongoingSessionId=${sessionId}`,
-    cancel_url: `${info.callbackUrl}/?purchaseResult=failed`,
+    success_url: `${info.callbackUrl}?purchaseResult=success&ongoingSessionId=${sessionId}`,
+    cancel_url: `${info.callbackUrl}?purchaseResult=failed`,
     client_reference_id: sessionId,
   };
 

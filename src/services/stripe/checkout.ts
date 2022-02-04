@@ -34,7 +34,7 @@ const buildCallbackUrl = () => {
 
   if (port) callbackUrl += ":" + port;
 
-  callbackUrl += "/stripe-checkout";
+  callbackUrl += "/stripe-checkout-result";
 
   return callbackUrl;
 };
