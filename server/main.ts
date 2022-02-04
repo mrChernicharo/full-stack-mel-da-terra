@@ -4,7 +4,7 @@ const envConfig = dotenv.config();
 if (envConfig.error) {
   throw envConfig.error;
 }
-console.log("Loaded env config: ", envConfig.parsed);
+// console.log("Loaded env config: ", envConfig.parsed);
 
 import { initServer } from "./server";
 

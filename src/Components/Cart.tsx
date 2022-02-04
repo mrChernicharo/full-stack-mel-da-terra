@@ -11,9 +11,19 @@ export const Cart = () => {
   const { user } = useAuthContext();
   const { orderItems } = useOrdersContext();
 
+  const [total, setTotal] = useState(0);
+
   const goToCheckout = () => {
     startCheckoutSession(orderItems, user);
   };
+
+  useEffect(() => {
+    const val = orderItems.reduce((acc, item) => {
+      return (acc += (item.product.valor / 100) * item.quantity);
+    }, 0);
+
+    setTotal(val);
+  }, [orderItems]);
 
   return (
     <div style={{ border: "1px solid", padding: ".5rem" }}>
@@ -28,12 +38,16 @@ export const Cart = () => {
       </ul>
 
       {!!orderItems.length && (
-        <button onClick={goToCheckout}>
-          <div>
-            <span>Comprar! </span>
-            <FaShoppingCart />
-          </div>
-        </button>
+        <>
+          <span>Total: R${total}</span>
+
+          <button onClick={goToCheckout}>
+            <div>
+              <span>Comprar! </span>
+              <FaShoppingCart />
+            </div>
+          </button>
+        </>
       )}
     </div>
   );
