@@ -1,8 +1,9 @@
 import express, { Application, Request, Response } from "express";
 import { db, getAllFromCollection, getDocData } from "./firebase/database";
 import { produtosImgUrls } from "./assets/img-urls";
-import { createCheckoutSession } from "./routes/createCheckoutSession";
+import { createCheckoutSession } from "./routes/checkout";
 import { getUseMiddleware } from "./middleware/getUser";
+import { stripeWebhooks } from "./routes/stripeWebhooks";
 const cors = require("cors");
 
 export function initServer() {
@@ -11,11 +12,6 @@ export function initServer() {
   app.use(cors());
 
   app.route("/").get((req, res) => res.status(200).send("<h1>API is up and running!</h1>"));
-
-  app.route("/test").get((req: Request, res: Response) => {
-    console.log("get request working!");
-    res.json({ message: `get request works!` });
-  });
 
   app.route("/add").get(async (req: Request, res: Response) => {
     try {
@@ -71,6 +67,8 @@ export function initServer() {
   });
 
   app.route("/checkout").post(bodyParser.json(), getUseMiddleware, createCheckoutSession);
+
+  app.route("/stripe-webhooks").post(bodyParser.raw({ type: "application/json" }), stripeWebhooks);
 
   const PORT = process.env.PORT || 9000;
   app.listen(PORT, () => {
