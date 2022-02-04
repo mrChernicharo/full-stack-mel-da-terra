@@ -1,14 +1,14 @@
-import { User } from "firebase/auth";
 import { IAppUser, useAuthContext } from "../../contexts/AuthContext";
+import { CheckoutSession } from "../../interfaces/checkoutSession";
 import { IOrder, IOrderItem } from "../../interfaces/order";
+
+declare const Stripe: any;
 
 export const startCheckoutSession = async (orderItems: IOrderItem[], user: IAppUser) => {
   if (!user) return alert("login first!");
 
   const jwt = await user.getIdToken();
   const order: IOrder = orderItems.map((item) => ({ productId: item.product.id, quantity: item.quantity }));
-
-  console.log({ jwt, orderItems, order });
 
   const response = await fetch("http://localhost:9000/checkout", {
     method: "POST",
@@ -20,9 +20,9 @@ export const startCheckoutSession = async (orderItems: IOrderItem[], user: IAppU
     ],
   });
 
-  const data = await response.json();
+  const session = await response.json();
 
-  console.log(data);
+  redirectToCheckout(session);
 };
 
 const buildCallbackUrl = () => {
@@ -37,4 +37,12 @@ const buildCallbackUrl = () => {
   callbackUrl += "/stripe-checkout";
 
   return callbackUrl;
+};
+
+export const redirectToCheckout = (session: CheckoutSession) => {
+  const stripe = Stripe(session.stripePublicKey);
+
+  stripe.redirectToCheckout({
+    sessionId: session.stripeCheckoutSessionId,
+  });
 };

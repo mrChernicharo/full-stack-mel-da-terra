@@ -73,9 +73,10 @@ export async function createCheckoutSession(req: Request, res: Response) {
 
     console.log({ sessionConfig, session, line_items: sessionConfig.line_items });
 
-    res.status(200).send({
+    res.status(200).json({
       stripeCheckoutSessionId: session.id,
       stripePublicKey: process.env.STRIPE_PUBLIC_KEY,
+      sessionUrl: session.url,
     });
   } catch (err) {
     console.log("Unexpected error ocurred while purchasing course", err);
