@@ -1,7 +1,7 @@
 import { getDocData } from "./firebase/firestore";
 
 export const fetchAllProducts = async () => {
-  const response = await fetch("http://localhost:9000/products");
+  const response = await fetch("http://localhost:3333/products");
   const data = await response.json();
   return data;
 };

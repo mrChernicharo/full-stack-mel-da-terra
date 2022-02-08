@@ -6,7 +6,7 @@
     "clean": "rimraf dist",
     "build": "tsc -P ./server.tsconfig.json",
     "start:local": "tsc-watch -P ./server.tsconfig.json --onSuccess \"node dist/main.js\"",
-    "webhooks:listen": "stripe listen --forward-to localhost:9000/stripe-webhooks"
+    "webhooks:listen": "stripe listen --forward-to localhost:3333/webhook"
   },
   "dependencies": {
     "@google-cloud/firestore": "^5.0.2",

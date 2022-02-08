@@ -13,7 +13,7 @@ export const PurchaseResult = () => {
 
   setTimeout(() => {
     location.assign("/");
-  }, 2500);
+  }, 1200);
 
   return (
     <div className="page-container">

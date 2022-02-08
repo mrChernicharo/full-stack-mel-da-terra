@@ -60,12 +60,7 @@ export async function createCheckoutSession(req: Request, res: Response) {
 
       const checkoutItems = retrievedProducts.map((product, i) => ({ quantity: orderItems[i].quantity, product }));
 
-      sessionConfig = setupPurchaseCourseSession(
-        reqData,
-        checkoutItems,
-        purchaseSession.id,
-        user ? user.stripeCustomerId : undefined
-      );
+      sessionConfig = setupPurchaseSession(reqData, checkoutItems, purchaseSession.id, user ? user.stripeCustomerId : undefined);
     }
 
     // create checkout session in stripe servers
@@ -84,7 +79,7 @@ export async function createCheckoutSession(req: Request, res: Response) {
   }
 }
 
-function setupPurchaseCourseSession(info: RequestData, checkoutItems: any[], sessionId: string, stripeCustomerId: string) {
+function setupPurchaseSession(info: RequestData, checkoutItems: any[], sessionId: string, stripeCustomerId: string) {
   const config = setupBaseSessionConfig(info, sessionId, stripeCustomerId);
 
   config.line_items = checkoutItems.map((item) => {

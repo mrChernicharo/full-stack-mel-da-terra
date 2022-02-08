@@ -10,7 +10,7 @@ export const startCheckoutSession = async (orderItems: IOrderItem[], user: IAppU
   const jwt = await user.getIdToken();
   const order: IOrder = orderItems.map((item) => ({ productId: item.product.id, quantity: item.quantity }));
 
-  const response = await fetch("http://localhost:9000/checkout", {
+  const response = await fetch("http://localhost:3333/checkout", {
     method: "POST",
     mode: "cors",
     body: JSON.stringify({ order, callbackUrl: buildCallbackUrl() }),

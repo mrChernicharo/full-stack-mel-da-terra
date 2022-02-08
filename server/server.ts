@@ -4,10 +4,11 @@ import { produtosImgUrls } from "./assets/img-urls";
 import { createCheckoutSession } from "./routes/checkout";
 import { getUseMiddleware } from "./middleware/getUser";
 import { stripeWebhooks } from "./routes/stripeWebhooks";
-const cors = require("cors");
 
 export function initServer() {
   const bodyParser = require("body-parser");
+  const cors = require("cors");
+
   const app: Application = express();
   app.use(cors());
 
@@ -68,9 +69,9 @@ export function initServer() {
 
   app.route("/checkout").post(bodyParser.json(), getUseMiddleware, createCheckoutSession);
 
-  app.route("/stripe-webhooks").post(bodyParser.raw({ type: "application/json" }), stripeWebhooks);
+  app.route("/webhook").post(bodyParser.raw({ type: "application/json" }), stripeWebhooks);
 
-  const PORT = process.env.PORT || 9000;
+  const PORT = process.env.PORT || 3333;
   app.listen(PORT, () => {
     console.log(`server running! Listening to port:${PORT}`);
   });
