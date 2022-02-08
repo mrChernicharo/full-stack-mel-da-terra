@@ -14,7 +14,6 @@ export async function stripeWebhooks(req: Request, res: Response) {
     // we've been contacted by stripe with the confirmation that the purchase was completed
     if (event.type == "checkout.session.completed") {
       const session = event.data.object;
-      console.log(session);
       await onCheckoutSessionCompleted(session);
     }
 
@@ -27,7 +26,6 @@ export async function stripeWebhooks(req: Request, res: Response) {
 }
 
 async function onCheckoutSessionCompleted(session) {
-  console.log(session);
   const purchaseSessionId = session.client_reference_id;
 
   const purchaseSession = await getDocData(`purchaseSessions/${purchaseSessionId}`);
@@ -47,8 +45,17 @@ async function fulfillCoursePurchase(userId: string, items: any[], purchaseSessi
   batch.update(purchaseSessionRef, { status: "completed" });
 
   const firestorePurchaseId = randomBytes(12).toString("base64");
+  const productsPromise = items.map((item) => getDocData(`products/${item.productId}`));
+  const retrievedProducts = await Promise.all(productsPromise);
+  const purchaseItems = retrievedProducts.map((item, i) => ({
+    product: item.nome,
+    value: item.valor,
+    quantity: items[i].quantity,
+  }));
+
   const purchaseData = {
-    items,
+    purchaseItems,
+    total: purchaseItems.reduce((acc, item) => (acc += item.value * item.quantity), 0),
     timestamp: Timestamp.now(),
   };
   const userPurchasesRef = db.doc(`users/${userId}/purchases/${firestorePurchaseId}`);

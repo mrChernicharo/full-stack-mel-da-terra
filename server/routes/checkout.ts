@@ -3,13 +3,6 @@ import { db, getDocData } from "../firebase/database";
 import { Timestamp } from "@google-cloud/firestore";
 
 const stripe = require("stripe")(process.env.STRIPE_SECRET_KEY);
-
-// interface Product {
-//   nome: string;
-//   pote: string;
-//   valor: number;
-//   imgPath: string;
-// }
 interface OrderItem {
   productId: string;
   quantity: number;
@@ -28,7 +21,7 @@ export async function createCheckoutSession(req: Request, res: Response) {
       userId: <string>req["uid"],
     };
 
-    const { orderItems, callbackUrl, userId } = reqData;
+    const { orderItems, userId } = reqData;
 
     if (!userId) {
       const message = "User must be Authenticated!";
@@ -105,6 +98,7 @@ function setupBaseSessionConfig(info: RequestData, sessionId: string, stripeCust
     success_url: `${info.callbackUrl}?purchaseResult=success&ongoingSessionId=${sessionId}`,
     cancel_url: `${info.callbackUrl}?purchaseResult=failed`,
     client_reference_id: sessionId,
+    locale: "pt-BR",
   };
 
   if (stripeCustomerId) {
