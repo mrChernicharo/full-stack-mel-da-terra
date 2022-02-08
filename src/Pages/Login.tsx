@@ -2,17 +2,25 @@ import { BaseSyntheticEvent, useContext } from "react";
 import { Link } from "react-router-dom";
 import "firebaseui/dist/firebaseui.css";
 import { AuthContext } from "../contexts/AuthContext";
+import { useNavigate } from "react-router-dom";
 
 export const Login = () => {
   const { signIn } = useContext(AuthContext);
 
+  const navigate = useNavigate();
+
   const handleSubmit = async (e: BaseSyntheticEvent) => {
     e.preventDefault();
-    console.log({ e, target: e.target, email: e.target[0].value, password: e.target[1].value });
 
     const [email, password] = [e.target[0].value, e.target[1].value];
 
-    signIn(email, password);
+    signIn(email, password)
+      .then((success) => {
+        setTimeout(() => navigate("/"), 1000);
+      })
+      .catch((err) => {
+        alert(err);
+      });
   };
 
   return (
@@ -21,10 +29,10 @@ export const Login = () => {
 
       <form onSubmit={handleSubmit}>
         <label>Email</label>
-        <input type="email" />
+        <input type="email" required lang="pt-BR" />
 
         <label>Senha</label>
-        <input type="password" />
+        <input type="password" required lang="pt-BR" />
         <button type="submit">Ok!</button>
       </form>
 

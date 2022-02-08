@@ -13,6 +13,7 @@ const s: { [key: string]: {} } = {
     justifyContent: "space-between",
     alignItems: "center",
     borderBottom: "1px solid white",
+    height: 32,
   },
   userData: {
     display: "flex",
@@ -45,13 +46,15 @@ export const Header = () => {
         Logout
       </Link>
 
-      <div style={s.userData}>
-        <span>{username}</span>
+      {user && (
+        <div style={s.userData}>
+          <span>{username}</span>
 
-        <Link to="/profile">
-          <img style={s.avatar} src={user?.photoURL || defaultImgUrl} />
-        </Link>
-      </div>
+          <Link to="/profile">
+            <img style={s.avatar} src={user?.photoURL || defaultImgUrl} />
+          </Link>
+        </div>
+      )}
 
       <Link to="/">
         <FaArrowLeft />

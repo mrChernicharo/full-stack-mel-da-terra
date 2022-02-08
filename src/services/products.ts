@@ -5,7 +5,8 @@ export const fetchAllProducts = async () => {
 
   if (!!localStorage.getItem("products")) {
     data = await JSON.parse(<string>localStorage.getItem("products"));
-  } else {
+  } 
+  else {
     const response = await fetch("http://localhost:3333/products");
     data = await response.json();
 

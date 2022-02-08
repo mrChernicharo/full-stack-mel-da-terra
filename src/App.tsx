@@ -18,19 +18,10 @@ function App() {
       <Header />
 
       <Routes>
-        {user && (
-          <>
-            <Route path="/" element={<Home />} />
-            <Route path="/profile" element={<Profile />} />
-          </>
-        )}
-        {!user && (
-          <>
-            {/* <Route path="/" element={<Login />} /> */}
-            <Route path="/login" element={<Login />} />
-            <Route path="/register" element={<Register />} />
-          </>
-        )}
+        <Route path="/" element={<Home />} />
+        <Route path="/profile" element={<Profile />} />
+        <Route path="/login" element={<Login />} />
+        <Route path="/register" element={<Register />} />
         <Route path="/stripe-checkout-result" element={<PurchaseResult />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
