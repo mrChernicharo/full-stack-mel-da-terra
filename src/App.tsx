@@ -7,16 +7,30 @@ import { Home } from "./Pages/Home";
 import { Login } from "./Pages/Login";
 import { NotFound } from "./Pages/NotFound";
 import { Register } from "./Pages/Register";
+import { useAuthContext } from "./contexts/AuthContext";
+import { Profile } from "./Pages/Profile";
 
 function App() {
+  const { user } = useAuthContext();
+
   return (
     <>
       <Header />
 
       <Routes>
-        <Route path="/login" element={<Login />} />
-        <Route path="/register" element={<Register />} />
-        <Route path="/" element={<Home />} />
+        {user && (
+          <>
+            <Route path="/" element={<Home />} />
+            <Route path="/profile" element={<Profile />} />
+          </>
+        )}
+        {!user && (
+          <>
+            {/* <Route path="/" element={<Login />} /> */}
+            <Route path="/login" element={<Login />} />
+            <Route path="/register" element={<Register />} />
+          </>
+        )}
         <Route path="/stripe-checkout-result" element={<PurchaseResult />} />
         <Route path="*" element={<NotFound />} />
       </Routes>

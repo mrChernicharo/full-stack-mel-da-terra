@@ -3,7 +3,7 @@ import { DocumentReference, getDoc, setDoc, collection, doc } from "firebase/fir
 import { IAppUser } from "../../contexts/AuthContext";
 import { db } from "./firestore";
 
-const defaultImgUrl = "https://avatar-management--avatars.us-west-2.prod.public.atl-paas.net/default-avatar.png";
+export const defaultImgUrl = "https://avatar-management--avatars.us-west-2.prod.public.atl-paas.net/default-avatar.png";
 
 export const fireAuthStateSubscription = (setUser: (user: IAppUser) => void) => {
   return onAuthStateChanged(getAuth(), (user) => {

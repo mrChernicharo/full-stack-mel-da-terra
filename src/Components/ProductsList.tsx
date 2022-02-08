@@ -43,6 +43,10 @@ export const ProductsList = () => {
     setSelectedProduct(prod);
   };
 
+  const handleModalClose = () => {
+    setSelectedProduct(null);
+  };
+
   useEffect(() => {
     fetchAllProducts().then((prods) => setProducts(prods));
     // getProduct("mlU1nbnueP3wTtN4wt90").then((prod) => console.log(prod));
@@ -67,7 +71,7 @@ export const ProductsList = () => {
             </li>
           ))}
       </ul>
-      {selectedProduct && <ProductDetailModal product={selectedProduct} onClose={() => setSelectedProduct(null)} />}
+      {selectedProduct && <ProductDetailModal product={selectedProduct} onClose={handleModalClose} />}
     </>
   );
 };

@@ -2,6 +2,7 @@ import { useContext, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { AuthContext } from "../contexts/AuthContext";
 import { FaArrowLeft } from "react-icons/fa";
+import { defaultImgUrl } from "../services/firebase/auth";
 
 const s: { [key: string]: {} } = {
   container: {
@@ -10,7 +11,17 @@ const s: { [key: string]: {} } = {
     color: "white",
     display: "flex",
     justifyContent: "space-between",
+    alignItems: "center",
     borderBottom: "1px solid white",
+  },
+  userData: {
+    display: "flex",
+    alignItems: "center",
+  },
+  avatar: {
+    height: 32,
+    width: 32,
+    marginLeft: 6,
   },
 };
 
@@ -34,7 +45,13 @@ export const Header = () => {
         Logout
       </Link>
 
-      <span>{username}</span>
+      <div style={s.userData}>
+        <span>{username}</span>
+
+        <Link to="/profile">
+          <img style={s.avatar} src={user?.photoURL || defaultImgUrl} />
+        </Link>
+      </div>
 
       <Link to="/">
         <FaArrowLeft />

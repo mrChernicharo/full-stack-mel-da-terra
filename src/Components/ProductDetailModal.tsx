@@ -52,6 +52,7 @@ export const ProductDetailModal = ({ product, onClose }: IProductDetailProps) =>
 
   const handleAddToCart = () => {
     addToCart({ product, quantity });
+    onClose();
   };
 
   const handleChangeQuantity = (action: "+" | "-") => {
